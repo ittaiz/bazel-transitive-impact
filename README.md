@@ -1,11 +1,11 @@
 # bazel-transitive-impact
 Exploring a nuance with impact of transitive changes in Bazel and test running
 
-* GreeterTest => greeter (BUILD, compile and runtime)    
-* greeter => before_greeter (only BUILD file wise, source code has no relation and that is to create a situation where change in before_greeter outputs the same greeter)    
-* before_greeter => greeter (only BUILD file wise, source code has no relation and that is to create a situation where change in before_before_greeter outputs the same before_greeter)    
+* GreeterTest => greeter (depends BUILD, compile and runtime)    
+* greeter => before_greeter (depends only BUILD file wise, source code has no relation and that is to create a situation where change in before_greeter outputs the same greeter)    
+* before_greeter => greeter (depends only BUILD file wise, source code has no relation and that is to create a situation where change in before_before_greeter outputs the same before_greeter)    
 
-When changing a single character in BeforeBeforeGreeting.java (which nothing depends on source wise) GreeterTest is run
+When changing a single character in BeforeBeforeGreeting.java (which nothing depends on source wise) and running `bazel test GreeterTest --explain=foo.log` GreeterTest is run
 
 Contents of explain:    
 ```Build options: --explain=foo.log
